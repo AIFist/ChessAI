@@ -15,3 +15,6 @@ class Game:
                 rect = (col*SQSIZE, row*SQSIZE, SQSIZE, SQSIZE)
                 
                 pygame.draw.rect(surface, color, rect)
+                
+    def show_piece(self,surface):
+        pass
