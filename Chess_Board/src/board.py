@@ -29,15 +29,15 @@ class Board:
 
             for possible_move in possible_moves:
                 possible_move_row, possible_move_col = possible_move
-                
                 if Square.in_range(possible_move_row, possible_move_col):
-                    if self.squares[possible_move_row][possible_move_col].sempty_or_rival(piece.color):
+                    if self.squares[possible_move_row][possible_move_col].isempty_or_rival(piece.color):
                         # created squares on the new move
                         initial = Square(row, col)
                         final = Square(possible_move_row, possible_move_col) # piece = piece
                         # create new move
                         move = Move(initial, final)
                         piece.add_move(move)
+                        
         
         if isinstance(piece, Pawn):
             pass
@@ -60,7 +60,7 @@ class Board:
                 self.squares[row][col] = Square(row, col)
     
     def _add_piece(self, color):
-        row_pawn, row_other = (6, 7) if color == 'white' else (0, 1)
+        row_pawn, row_other = (6, 7) if color == 'white' else (1, 0)
 
         for col in range(COLS):
             # Here, you need to use square brackets to access the specific element in self.squares
