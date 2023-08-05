@@ -74,13 +74,54 @@ class Board:
                         move = Move(initial, final)
                         piece.add_move(move)
                         
-        
-        if isinstance(piece, Pawn): pawn_moves()
-        elif isinstance(piece, Knight): knight_moves()
-        elif isinstance(piece, Bishop):pass
-        elif isinstance(piece, Rook):pass
-        elif isinstance(piece, Queen):pass
-        elif isinstance(piece, King):pass
+        def straightline_moves(incrs):
+            for incr in incrs:
+                row_incr, col_incr = incr
+                possible_move_row = row+ row_incr
+                possible_move_col = col + col_incr
+                
+                # while true
+                
+                
+        if isinstance(piece, Pawn): 
+            pawn_moves()
+        elif isinstance(piece, Knight): 
+            knight_moves()
+        elif isinstance(piece, Bishop):
+            straightline_moves(
+                [
+                    (-1,1) , # up-right
+                    (-1,-1), # up-left
+                    (1,1), # down-right
+                    (1,-1), # down-left
+                ]
+            )
+        elif isinstance(piece, Rook):
+            straightline_moves(
+                [
+                    (-1, 0),# up
+                    (0, 1) , # right
+                    (1,0), # down
+                    (0,-1), # left
+                ]
+            )
+        elif isinstance(piece, Queen):
+            straightline_moves(
+                [
+                    (-1, 0),# up
+                    (0, 1) , # right
+                    (1,0), # down
+                    (0,-1), # left
+                    (-1,1) , # up-right
+                    (-1,-1) ,# up-left
+                    (1,1), # down-right
+                    (1,-1), # down-left
+                ]
+                
+                
+            )
+        elif isinstance(piece, King):
+            pass
     
     
     
