@@ -10,9 +10,7 @@ class Config:
         self._add_themes()
         self.idx = 0
         self.theme = self.themes[self.idx]
-        
-        # font
-        
+        self.font = pygame.font.SysFont('monospace', 18, bold=True)
         self.move_sound = Sound(os.path.join('/home/ishaquenizamani/work/opensourse/ishaque projecr/lol/ChessAI/Chess_Board/assets/sounds/move.wav'))
         self.capture_sound = Sound(os.path.join('/home/ishaquenizamani/work/opensourse/ishaque projecr/lol/ChessAI/Chess_Board/assets/sounds/capture.wav'))
     

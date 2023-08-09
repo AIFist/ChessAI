@@ -3,6 +3,7 @@ from const import *
 from board import Board
 from dragger import Dragger
 from config import Config
+from square import Square
 class Game:
     def __init__(self) -> None:
         self.next_player = 'white'
@@ -21,6 +22,25 @@ class Game:
                 rect = (col*SQSIZE, row*SQSIZE, SQSIZE, SQSIZE)
                 # blit
                 pygame.draw.rect(surface, color, rect)
+                
+                # row coordinate
+                if col == 0:
+                    # color
+                    color = theme.bg.dark  if row % 2 == 0 else theme.bg.light
+                    # label 
+                    lbl = self.config.font.render(str(ROWS - row), 1, color)
+                    lbl_pos = (5, 5 + row * SQSIZE)
+                    surface.blit(lbl, lbl_pos)
+                    
+                # col coordinate 
+                if row == 7:
+                    # color
+                    color = theme.bg.dark  if (row +col) % 2 == 0 else theme.bg.light
+                    # label 
+                    lbl = self.config.font.render(Square.get_alphacol(col), 1, color)
+                    lbl_pos = (col * SQSIZE +SQSIZE -20, HEIGHT -20 )
+                    surface.blit(lbl, lbl_pos)
+                    
                 
     def show_piece(self,surface):
         for row in range(ROWS):
@@ -86,3 +106,9 @@ class Game:
         
     def change_theme(self):
         self.config.change_theme()
+        
+    def play_sound(self, captured = False):
+        if captured:
+            self.config.capture_sound.play()
+        else:
+            self.config.move_sound.play()
