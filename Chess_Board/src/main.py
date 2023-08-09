@@ -92,6 +92,10 @@ class Main:
                         
                         
                     dragger.undrag_piece()
+                elif event.type == pygame.KEYDOWN:
+                    # changes themes
+                    if event.key == pygame.K_t:
+                        game.change_theme()
                 # quit
                 elif event.type == pygame.QUIT:
                     pygame.quit()
