@@ -21,10 +21,6 @@ class Board:
         self.squares[initial.row][initial.col].piece = None
         self.squares[final.row][final.col].piece = piece
         
-        # pawn promotion
-        if isinstance(piece, Pawn):
-            self.check_promotion(piece, final)
-            
         
         # King castling
         if isinstance(piece, King):
@@ -34,6 +30,13 @@ class Board:
                 self.move(rook, rook.moves[-1])
             
             
+        if isinstance(piece, Pawn):
+            # pawn en pessant
+            if self.en_pessant(initial, final):
+                piece.en_passant = True
+        else:
+            # pawn promotion      
+            self.check_promotion(piece, final)
         piece.moved = True
         
         # clear valid  moves
@@ -54,6 +57,8 @@ class Board:
     def caslting(self, initial, final):
         return abs(initial.col - final.col) == 2
     
+    def en_pessant(self, initial, final):
+        return abs(initial.row, final.row) == 2
     def in_check(self, piece, move):
         temp_piece = copy.deepcopy(piece)
         temp_board = copy.deepcopy(self)
@@ -109,7 +114,7 @@ class Board:
             # diagonal moves
             possible_move_row  = row +piece.dir
             possible_move_cols = [col -1, col+1]
-            
+     
             for possible_move_col in possible_move_cols:
                 if Square.in_range(possible_move_row, possible_move_col):
                     if self.squares[possible_move_row][possible_move_col].has_enemy_piece(piece.color):
@@ -128,6 +133,33 @@ class Board:
                         else:
                             # append new move
                             piece.add_move(move)
+                    
+            
+            # en_pessant move 
+            r = 3 if piece.color == 'white' else 4
+            # left en passant 
+            if Square.in_range(piece.col-1) and piece.row  == r:
+                if self.squares[row][col-1].has_enemy_piece(piece.color):
+                    p = self.squares[row][col-1].piece 
+                    if isinstance(p, Pawn):
+                        if p.en_passant:
+                                # create intial and final move
+                            initial =  Square(row, col)
+                            final_piece  = self.squares[row][col-1].piece
+                            final  = Square(possible_move_row, possible_move_col, final_piece)
+                            # create new move
+                            move = Move(initial, final)
+                            # check potenstial checks 
+                            if bool:
+                                if not self.in_check(piece, move):
+                                
+                                    # append new move
+                                    piece.add_move(move)
+                            else:
+                                # append new move
+                                piece.add_move(move)
+                        
+                            
                                 
             
         def knight_moves():
