@@ -15,9 +15,9 @@ class Piece:
     def set_texture(self, size = 80):
         
         if size == 80:
-            self.texture = f'/home/ishaquenizamani/work/opensourse/ishaque projecr/lol/ChessAI/Chess_Board/assets/images/imgs-80px/{self.color}_{self.name}.png'
+            self.texture = f'../assets/images/imgs-80px/{self.color}_{self.name}.png'
         else:
-            self.texture = f'/home/ishaquenizamani/work/opensourse/ishaque projecr/lol/ChessAI/Chess_Board/assets/images/imgs-128px/{self.color}_{self.name}.png'
+            self.texture = f'../assets/images/imgs-128px/{self.color}_{self.name}.png'
 
         
     def add_move(self, move):
