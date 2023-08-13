@@ -73,6 +73,7 @@ class Game:
                 # blit
                 pygame.draw.rect(surface, color, rect)
                 
+    # last move
     def show_last_move(self, surface):
         theme = self.config.theme
         if self.board.last_move:
