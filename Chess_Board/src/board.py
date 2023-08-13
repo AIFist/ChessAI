@@ -70,7 +70,6 @@ class Board:
     # this function is suppose  to set all piece to false en_passant except pawn  
     def set_true_en_passant(self, piece):
         
-        
         if not isinstance(piece, Pawn):
             return
 
