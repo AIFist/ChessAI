@@ -227,8 +227,7 @@ class Board:
                         if bool:
                             if not self.in_check(piece, move):
                                 # append new move
-                                piece.add_move(move)
-                            else: break
+                                piece.add_move(move)    
                         else:
                             # append new move
                             piece.add_move(move)
