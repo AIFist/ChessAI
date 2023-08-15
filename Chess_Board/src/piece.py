@@ -12,6 +12,8 @@ class Piece:
         self.set_texture()
         self.texture_rect = texture_rect
     
+    """ Set texture do a visual represention of board and pieces
+    """
     def set_texture(self, size = 80):
         
         if size == 80:
