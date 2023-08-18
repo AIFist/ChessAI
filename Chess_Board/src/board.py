@@ -231,7 +231,8 @@ class Board:
                         else:
                             # append new move
                             piece.add_move(move)
-
+        
+        """straightline_moves funtion is responsible for moving pieces """ 
         def straightline_moves(incrs):
             for incr in incrs:
                 row_incr, col_incr = incr
