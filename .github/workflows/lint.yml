@@ -20,7 +20,7 @@ jobs:
         python-version: 3.10.x
 
     - name: Change to appropriate directory
-      run: cd Chess_Board/requirements.txt  # Change this to the correct path
+      run: cd Chess_Board  # Change this to the correct path
 
     - name: Install dependencies
       run: |
