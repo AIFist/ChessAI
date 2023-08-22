@@ -1,6 +1,6 @@
 import pygame
 import sys
-from const import *
+from const import WIDTH, HEIGHT, SQSIZE
 from game import Game
 from square import Square
 from move import Move
@@ -9,7 +9,7 @@ from move import Move
 class Main:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption('Chess')
         self.game = Game()
 
@@ -51,8 +51,8 @@ class Main:
 
                 # mouse motion
                 elif event.type == pygame.MOUSEMOTION:
-                    motion_row = event.pos[1]  // SQSIZE
-                    motion_col = event.pos[0]  // SQSIZE
+                    motion_row = event.pos[1]//SQSIZE
+                    motion_col = event.pos[0]//SQSIZE
                     game.set_hover(motion_row, motion_col)
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
@@ -90,7 +90,7 @@ class Main:
                             game.show_piece(screen)
                             # next turn
                             game.next_turn()
-                        
+    
                     dragger.undrag_piece()
                 elif event.type == pygame.KEYDOWN:
                     # changes themes
