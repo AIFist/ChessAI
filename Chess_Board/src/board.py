@@ -1,6 +1,6 @@
-from const import *
+from const import ROWS, COLS
 from square import Square
-from piece import *
+from piece import Pawn, Queen, King, Knight, Rook, Bishop
 from move import Move
 from sound import Sound
 import copy

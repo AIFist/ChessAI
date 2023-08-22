@@ -39,7 +39,7 @@ class Main:
                     if board.squares[clicked_row][clicked_col].has_piece():
                         piece = board.squares[clicked_row][clicked_col].piece
                         if piece.color == game.next_player:
-                            board.calc_moves(piece, clicked_row, clicked_col, bool = True)
+                            board.calc_moves(piece, clicked_row, clicked_col, bool=True)
                             dragger.save_initial(event.pos)
                             dragger.drag_piece(piece)
                             # show methos
@@ -47,12 +47,11 @@ class Main:
                             game.show_last_move(screen)
                             game.show_moves(screen)
                             game.show_piece(screen)
-  
 
                 # mouse motion
                 elif event.type == pygame.MOUSEMOTION:
-                    motion_row = event.pos[1]//SQSIZE
-                    motion_col = event.pos[0]//SQSIZE
+                    motion_row = event.pos[1] // SQSIZE
+                    motion_col = event.pos[0] // SQSIZE
                     game.set_hover(motion_row, motion_col)
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
@@ -90,7 +89,7 @@ class Main:
                             game.show_piece(screen)
                             # next turn
                             game.next_turn()
-    
+
                     dragger.undrag_piece()
                 elif event.type == pygame.KEYDOWN:
                     # changes themes

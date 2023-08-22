@@ -16,7 +16,7 @@ class Piece:
     """ Set texture do a visual represention of board and pieces
     """
     def set_texture(self, size=80):
-        
+
         if size == 80:
             self.texture = f'../assets/images/imgs-80px/{self.color}_{self.name}.png'
         else:
