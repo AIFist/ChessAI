@@ -68,7 +68,7 @@ class Board:
     def castling(self, initial, final):
         return abs(initial.col - final.col) == 2
     # this function is suppose  to set all piece to false en_passant except pawn
-    
+
     def set_true_en_passant(self, piece):
 
         if not isinstance(piece, Pawn):
@@ -127,10 +127,10 @@ class Board:
                             # append new move
                             piece.add_move(move)
                     # blocked
-                    else: 
+                    else:
                         break
                 # not in range
-                else: 
+                else:
                     break
 
             # diagonal moves
@@ -199,6 +199,7 @@ class Board:
                             else:
                                 # append new move
                                 piece.add_move(move)
+        
         def knight_moves():
             # 8 possible moves
             possible_moves = [
@@ -228,7 +229,7 @@ class Board:
                         if bool:
                             if not self.in_check(piece, move):
                                 # append new move
-                                piece.add_move(move)  
+                                piece.add_move(move)
                         else:
                             # append new move
                             piece.add_move(move)
@@ -277,7 +278,7 @@ class Board:
                             break
 
                     # not in range
-                    else: 
+                    else:
                         break
 
                     # incrementing incrs
