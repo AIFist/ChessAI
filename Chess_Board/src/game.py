@@ -13,11 +13,7 @@ class Game:
         self.board = Board()
         self.dragger = Dragger()
         self.config = Config()
-
-
     # show methods
-
-
     def show_bg(self, surface):
 
         theme = self.config.theme
@@ -53,7 +49,7 @@ class Game:
             for col in range(COLS):
                 if self.board.squares[row][col].has_piece():
                     piece = self.board.squares[row][col].piece
- 
+
                     # all pieces exepct dragger piece
                     if piece is not self.dragger.piece:
                         piece.set_texture(size=80)
@@ -107,7 +103,7 @@ class Game:
         self.next_player = 'white' if self.next_player == 'black' else 'black'
 
     def set_hover(self, row, col):
-        
+
         self.hovered_sqr = self.board.squares[row][col]
 
     def change_theme(self):
