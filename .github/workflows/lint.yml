@@ -19,6 +19,9 @@ jobs:
       with:
         python-version: 3.10.x
 
+    - name: Change to appropriate directory
+      run: cd Chess_Board/requirements.txt  # Change this to the correct path
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -26,5 +29,5 @@ jobs:
 
     - name: Run linting
       run: |
-        pip install flake8  # Install flake8 if not in requirements.txt
-        flake8 --ignore=E501  # Run linting, ignoring long line errors
+        pip install flake8
+        flake8 --ignore=E501
