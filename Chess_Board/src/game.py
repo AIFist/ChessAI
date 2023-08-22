@@ -13,9 +13,9 @@ class Game:
         self.board = Board()
         self.dragger = Dragger()
         self.config = Config()
-    
+
     # show methods
-    
+
     def show_bg(self, surface):
 
         theme = self.config.theme

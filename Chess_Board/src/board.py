@@ -199,7 +199,7 @@ class Board:
                             else:
                                 # append new move
                                 piece.add_move(move)
-        
+
         def knight_moves():
             # 8 possible moves
             possible_moves = [
