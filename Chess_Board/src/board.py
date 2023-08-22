@@ -50,22 +50,26 @@ class Board:
 
         # move
         piece.moved = True
-
+        
         # clear valid moves
         piece.clear_moves()
 
         # set last move
         self.last_move = move
 
+
     def valid_move(self, piece, move):
         return move in piece.moves
+
 
     def check_promotion(self, piece, final):
         if final.row == 0 or final.row == 7:
             self.squares[final.row][final.col].piece = Queen(piece.color)
 
+
     def castling(self, initial, final):
         return abs(initial.col - final.col) == 2
+
 
     # this function is suppose  to set all piece to false en_passant except pawn  
     def set_true_en_passant(self, piece):
