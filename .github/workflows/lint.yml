@@ -17,7 +17,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x
+        python-version: 3.10.x
 
     - name: Install dependencies
       run: |
@@ -26,5 +26,5 @@ jobs:
 
     - name: Run linting
       run: |
-        pip install flake8  # Install flake8 if not in requirements.txt
-        flake8 --ignore=E501  # Run linting, ignoring long line errors
+        pip install flake8
+        flake8 --ignore=E501
