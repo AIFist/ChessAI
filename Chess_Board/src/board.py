@@ -65,13 +65,12 @@ class Board:
         if final.row == 0 or final.row == 7:
             if num == 1:
                 self.squares[final.row][final.col].piece = Queen(piece.color)
-            elif num==2:
+            elif num == 2:
                 self.squares[final.row][final.col].piece = Knight(piece.color)
-            elif num==3:
+            elif num == 3:
                 self.squares[final.row][final.col].piece = Bishop(piece.color)
-            elif num==4:
+            elif num == 4:
                 self.squares[final.row][final.col].piece = Rook(piece.color)
-            
 
     def castling(self, initial, final):
         return abs(initial.col - final.col) == 2
