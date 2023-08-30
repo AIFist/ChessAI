@@ -1,6 +1,6 @@
 import pygame
-from pygame.locals import *
-
+from pygame.locals import QUIT, MOUSEBUTTONDOWN
+ 
 class Check:
     def drop_down(self):
         pygame.init()
@@ -57,8 +57,8 @@ class Check:
             pygame.display.flip()
             pygame.time.Clock().tick(30)
 
-        
         return selected_option
+
 
 if __name__ == "__main__":
     ch = Check()

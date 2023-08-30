@@ -42,7 +42,7 @@ class Board:
 
             # pawn promotion
             else:
-                self.check_promotion(piece, final,testing)
+                self.check_promotion(piece, final, testing)
 
         # king castling
         if isinstance(piece, King):
@@ -63,17 +63,17 @@ class Board:
     def valid_move(self, piece, move):
         return move in piece.moves
 
-    def check_promotion(self, piece, final,testing ):
+    def check_promotion(self, piece, final, testing):
         if not testing:
             if final.row == 0 or final.row == 7:
-                pi  =self.check.drop_down()
-                if str(pi)=="Queen":
+                pi = self.check.drop_down()
+                if str(pi) == "Queen":
                     self.squares[final.row][final.col].piece = Queen(piece.color)
-                elif str(pi)=="Knight":
+                elif str(pi) == "Knight":
                     self.squares[final.row][final.col].piece = Knight(piece.color)
-                elif str(pi)=="Bishop":
+                elif str(pi) == "Bishop":
                     self.squares[final.row][final.col].piece = Bishop(piece.color)
-                elif str(pi)=="Rook":
+                elif str(pi) == "Rook":
                     self.squares[final.row][final.col].piece = Rook(piece.color)
 
     def castling(self, initial, final):
