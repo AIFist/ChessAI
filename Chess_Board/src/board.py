@@ -4,6 +4,7 @@ from piece import Pawn, Queen, King, Knight, Rook, Bishop
 from move import Move
 from sound import Sound
 import copy
+from check import Check
 import os
 
 
@@ -12,6 +13,7 @@ class Board:
     def __init__(self):
         self.squares = [[0, 0, 0, 0, 0, 0, 0, 0] for col in range(COLS)]
         self.last_move = None
+        self.check = Check()
         self._create()
         self._add_pieces('white')
         self._add_pieces('black')
@@ -40,7 +42,7 @@ class Board:
 
             # pawn promotion
             else:
-                self.check_promotion(piece, final, 1)
+                self.check_promotion(piece, final,testing)
 
         # king castling
         if isinstance(piece, King):
@@ -61,16 +63,18 @@ class Board:
     def valid_move(self, piece, move):
         return move in piece.moves
 
-    def check_promotion(self, piece, final, num):
-        if final.row == 0 or final.row == 7:
-            if num == 1:
-                self.squares[final.row][final.col].piece = Queen(piece.color)
-            elif num == 2:
-                self.squares[final.row][final.col].piece = Knight(piece.color)
-            elif num == 3:
-                self.squares[final.row][final.col].piece = Bishop(piece.color)
-            elif num == 4:
-                self.squares[final.row][final.col].piece = Rook(piece.color)
+    def check_promotion(self, piece, final,testing ):
+        if not testing:
+            if final.row == 0 or final.row == 7:
+                pi  =self.check.drop_down()
+                if str(pi)=="Queen":
+                    self.squares[final.row][final.col].piece = Queen(piece.color)
+                elif str(pi)=="Knight":
+                    self.squares[final.row][final.col].piece = Knight(piece.color)
+                elif str(pi)=="Bishop":
+                    self.squares[final.row][final.col].piece = Bishop(piece.color)
+                elif str(pi)=="Rook":
+                    self.squares[final.row][final.col].piece = Rook(piece.color)
 
     def castling(self, initial, final):
         return abs(initial.col - final.col) == 2
