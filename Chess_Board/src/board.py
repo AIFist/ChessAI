@@ -5,7 +5,7 @@ from move import Move
 from sound import Sound
 import copy
 from check import Check
-import os
+
 
 
 class Board:
@@ -36,8 +36,7 @@ class Board:
                 self.squares[initial.row][initial.col + diff].piece = None
                 self.squares[final.row][final.col].piece = piece
                 if not testing:
-                    sound = Sound(
-                        os.path.join('../assets/sounds/capture.wav'))
+                    sound = Sound("D:/chess game with AI/src/assets/sounds/capture.wav")
                     sound.play()
 
             # pawn promotion
