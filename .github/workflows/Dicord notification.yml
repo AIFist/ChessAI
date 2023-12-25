@@ -20,9 +20,17 @@ jobs:
           if [ "${{ github.event_name }}" = "push" ]; then
             MESSAGE="New push to main branch by ${GITHUB_ACTOR}"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
-            MESSAGE="New pull request #${{ github.event.number }} by ${GITHUB_ACTOR}: ${GITHUB_SERVER_URL}/${{ github.repository }}/pull/${{ github.event.number }} and it assign to  ${{ github.event.issue.assignee.login }}"
+            MESSAGE="New pull request #${{ github.event.number }} by ${GITHUB_ACTOR}: ${{ github.event.pull_request.html_url }}"
+            
+            # Fetch assignees using GitHub REST API
+            ASSIGNEE_LIST=$(curl -sH "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.url }}/assignees" | jq -r '.[].login')
+            
+            if [ -n "$ASSIGNEE_LIST" ]; then
+              MESSAGE="$MESSAGE\nAssignees: $ASSIGNEE_LIST"
+            else
+              MESSAGE="$MESSAGE\nNo assignees."
+            fi
           fi
 
           curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MESSAGE\"}" "${{ secrets.DISCORD_WEBHOOK_URL }}"
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
