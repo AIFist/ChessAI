@@ -1,0 +1,28 @@
+name: Push and Pull Request Notification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  notify_on_activity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify on Discord
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            MESSAGE="New push to main branch by ${GITHUB_ACTOR}"
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            MESSAGE="New pull request ${{ github.event.number }} by ${GITHUB_ACTOR}: ${GITHUB_SERVER_URL}/${{ github.repository }}/pull/${{ github.event.number }}"
+          fi
+
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MESSAGE\"}" "${{ secrets.DISCORD_WEBHOOK_URL }}"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
