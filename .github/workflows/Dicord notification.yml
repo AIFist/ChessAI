@@ -20,7 +20,7 @@ jobs:
           if [ "${{ github.event_name }}" = "push" ]; then
             MESSAGE="New push to main branch by ${GITHUB_ACTOR}"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
-            MESSAGE="New pull request #${{ github.event.number }} by ${GITHUB_ACTOR}: ${GITHUB_SERVER_URL}/${{ github.repository }}/pull/${{ github.event.number }}"
+            MESSAGE="New pull request #${{ github.event.number }} by ${GITHUB_ACTOR}: ${GITHUB_SERVER_URL}/${{ github.repository }}/pull/${{ github.event.number }} and it assign to  ${{ github.event.issue.assignee.login }}"
           fi
 
           curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MESSAGE\"}" "${{ secrets.DISCORD_WEBHOOK_URL }}"
