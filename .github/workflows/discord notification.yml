@@ -1,0 +1,30 @@
+name: Push and Pull Request Notification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  notify_on_activity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify on Discord
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            MESSAGE="New push to main branch by ${GITHUB_ACTOR}"
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            MESSAGE="New pull request #${{ github.event.number }} by ${GITHUB_ACTOR}: ${{ github.event.html_url }}"
+            ASSIGNEE_LIST=$(curl -sH "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "${{ github.event.url }}/assignees" | jq -r '.[].login')
+            if [ -n "$ASSIGNEE_LIST" ]; then
+              MESSAGE="$MESSAGE\nAssignees: $ASSIGNEE_LIST"
+            fi
+          fi
+
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MESSAGE\"}" "${{ secrets.DISCORD_WEBHOOK_URL }}"
